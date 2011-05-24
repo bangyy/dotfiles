@@ -1,0 +1,24 @@
+defscrollback 10000
+
+defutf8 on
+defkanji utf-8
+encoding utf-8 utf-8
+defencoding utf-8
+
+vbell off
+escape 
+hardstatus alwayslastline "%{= wk} %-w%{=b kb}%n %t%{-}%+w %= %{=b wb}%y/%m/%d %{=b wb}%c"
+
+#http://vim-users.jp/2009/08/hack64/
+defbce "on"
+term xterm-256color
+termcapinfo xterm-256color 'is=rmJH?7h?1;4;6l'
+
+bind w windowlist -b
+#defhstatus I^En:^EtI
+defhstatus In:tI
+shell -$SHELL
+startup_message off
+autodetach on
+
+shelltitle "$ |zsh"
