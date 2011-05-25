@@ -84,6 +84,9 @@ set shortmess+=I
 set clipboard=unnamed
 au BufEnter * execute ":lcd " . expand("%:p:h") 
 
+"pathoge.vim
+call pathogen#runtime_append_all_bundles()
+
 map tl gt
 map th gT
 

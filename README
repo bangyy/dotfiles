@@ -1,0 +1,4 @@
+how to use
+1. ln -s ~/dotfiles/.vim/bundle/vim-pathogen/autoload/pathogen.vim ~/dotfiles/.vim/autoload/
+2. ln -s ~/dotfiles/.vimrc ~/.vimrc
+2. ln -s ~/dotfiles/.vim ~/.vim
