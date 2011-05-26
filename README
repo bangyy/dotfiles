@@ -4,4 +4,5 @@ ln -s ~/dotfiles/.vim/bundle/vim-pathogen/autoload/pathogen.vim ~/dotfiles/.vim/
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.vim ~/.vim
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+ln -s ~/dotfiles/.zsh ~/.zsh
 ln -s ~/dotfiles/.screenrc ~/.screenrc
