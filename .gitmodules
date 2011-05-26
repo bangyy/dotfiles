@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/YankRing.vim"]
 	path = .vim/bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule ".vim/bundle/vimshell"]
+	path = .vim/bundle/vimshell
+	url = git://github.com/Shougo/vimshell.git
