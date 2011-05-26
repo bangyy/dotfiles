@@ -1,0 +1,4 @@
+#compdef ssh_screen
+#
+connectHosts=$(cat ~/.ssh/known_hosts | cut -d' ' -f 1 )
+_arguments "1:first:($connectHosts)"
