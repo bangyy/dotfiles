@@ -108,7 +108,6 @@ nnoremap <Space>v :vnew
 nnoremap <Space>t :tabnew
 nnoremap <Space>te :tabnew<CR>
 
-let g:NeoComplCache_EnableAtStartup = 1
 inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
 
@@ -118,14 +117,15 @@ autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
 filetype plugin on
 
 "neocomplecache
-let g:NeoComplCache_DictionaryFileTypeLists = {
-            \ 'default' : '',
-            \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ 'php' : $HOME.'/.vim/dict/PHP.dict',
-            \ 'inc' : $HOME.'/.vim/dict/PHP.dict',
-            \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-            \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
+"let g:NeoComplCache_EnableAtStartup = 1
+"let g:NeoComplCache_DictionaryFileTypeLists = {
+"            \ 'default' : '',
+"            \ 'vimshell' : $HOME.'/.vimshell_hist',
+"            \ 'php' : $HOME.'/.vim/dict/PHP.dict',
+"            \ 'inc' : $HOME.'/.vim/dict/PHP.dict',
+"            \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
+"            \ 'scheme' : $HOME.'/.gosh_completions'
+"            \ }
 
 let g:NeoComplCache_MaxTryKeywordLength=100
 let g:NeoComplCache_EnableUnderbarCompletion=1
