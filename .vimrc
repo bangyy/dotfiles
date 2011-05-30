@@ -117,7 +117,7 @@ autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
 filetype plugin on
 
 "neocomplecache
-"let g:NeoComplCache_EnableAtStartup = 1
+let g:neocomplcache_enable_at_startup = 1
 "let g:NeoComplCache_DictionaryFileTypeLists = {
 "            \ 'default' : '',
 "            \ 'vimshell' : $HOME.'/.vimshell_hist',
@@ -128,7 +128,7 @@ filetype plugin on
 "            \ }
 
 let g:NeoComplCache_MaxTryKeywordLength=100
-let g:NeoComplCache_EnableUnderbarCompletion=1
+let g:neocomplcache_enable_underbar_completion = 1
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
