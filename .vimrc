@@ -147,6 +147,9 @@ nnoremap <Space>u :Unite buffer<CR>
 "let g:unite_enable_split_vertically=1
 let g:unite_winwidth=40
 
+"smartchr
+inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
+
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
 autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
