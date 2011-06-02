@@ -95,7 +95,6 @@ map gl <C-w>l
 map gh <C-w>h
 map <C-h> gT
 map <C-l> gt
-"map <Space> <PageDown>
 
 map j gj
 map k gk
@@ -147,6 +146,13 @@ nnoremap <Space>u :Unite buffer<CR>
 "let g:unite_enable_split_vertically=1
 let g:unite_winwidth=40
 
+"NERD_commenter.vim
+let g:NERDCreateDefaultMappings = 0
+let NERDShutUp = 1
+"let NERDSpaceDelims = 1
+map ,c<space> <plug>NERDCommenterToggle
+vmap ,s<space> <Plug>NERDCommenterSexy
+vmap ,b<space> <Plug>NERDCommenterMinimal
 
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
