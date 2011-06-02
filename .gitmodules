@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/vimproc"]
 	path = .vim/bundle/vimproc
 	url = git://github.com/Shougo/vimproc.git
+[submodule ".vim/bundle/jslint.vim"]
+	path = .vim/bundle/jslint.vim
+	url = git://github.com/hallettj/jslint.vim.git
