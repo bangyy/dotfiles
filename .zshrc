@@ -90,14 +90,14 @@ compinit
 #function ssh_screen(){}
 
 PROMPT=$'%B%{\e[32m%}[%n@%M: %~]'$'\n$%b%{\e[m%} ' ;
-RPROMPT="[%t on zsh]"
+RPROMPT="[%t]"
 SPROMPT="correct: %R -> %r ? " 
 
 setopt complete_aliases     #エイリアスを設定したコマンドでも補完機能を使えるようにする
 alias mysqlcon='mysql -u bangyy -p -h mysql102.db.sakura.ne.jp'
 alias ll='ls -laoG'
 alias mv='mv -vi'
-alias rm='rm -vi'
+alias rm='rm -v'
 alias cp='cp -vi'
 alias cdd='cd ..'
 alias vi='vim -p'
@@ -106,5 +106,3 @@ alias vi='vim -p'
 if [ $SHLVL = 1 ];then
     screen -xR
 fi
-
-[[ -s "/Users/bang/.rvm/scripts/rvm" ]] && source "/Users/bang/.rvm/scripts/rvm"
