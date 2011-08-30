@@ -34,3 +34,6 @@
 [submodule ".vim/bundle/jslint.vim"]
 	path = .vim/bundle/jslint.vim
 	url = git://github.com/hallettj/jslint.vim.git
+[submodule ".vim/bundle/lucius.git"]
+	path = .vim/bundle/lucius.git
+	url = git://github.com/vim-scripts/Lucius.git
