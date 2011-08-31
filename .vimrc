@@ -29,14 +29,9 @@ set textwidth=0
 set wrap
 
 syntax on
-set t_CO=256
-colorscheme wombat256
+set t_Co=256
 
 
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
-highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-match HankakuSpace / /
 
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
 highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
@@ -157,3 +152,10 @@ vmap ,b<space> <Plug>NERDCommenterMinimal
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
 autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
+
+colorscheme lucius
+
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+match HankakuSpace / /
