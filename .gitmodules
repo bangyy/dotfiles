@@ -37,3 +37,9 @@
 [submodule ".vim/bundle/lucius"]
 	path = .vim/bundle/lucius
 	url = git://github.com/vim-scripts/Lucius.git
+[submodule ".vim/bundle/ack.vim"]
+	path = .vim/bundle/ack.vim
+	url = git://github.com/mileszs/ack.vim.git
+[submodule ".vim/bundle/vimfiler"]
+	path = .vim/bundle/vimfiler
+	url = git://github.com/Shougo/vimfiler.git
