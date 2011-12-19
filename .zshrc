@@ -106,3 +106,18 @@ alias vi='vim -p'
 if [ $SHLVL = 1 ];then
     screen -xR
 fi
+
+#http://d.hatena.ne.jp/mollifier/20110221/p1
+# nvm と指定されたバージョンの Node.js がインストール済みの場合だけ
+# # 設定を有効にする
+if [[ -f ~/.nvm/nvm.sh ]]; then
+    source ~/.nvm/nvm.sh
+
+    if which nvm >/dev/null 2>&1 ;then
+        _nodejs_use_version="latest"
+        if nvm ls | grep -F -e "${_nodejs_use_version}" >/dev/null 2>&1 ;then
+            nvm use "${_nodejs_use_version}" >/dev/null
+        fi
+        unset _nodejs_use_version
+    fi
+fi
