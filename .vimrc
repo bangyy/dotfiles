@@ -105,10 +105,12 @@ nnoremap <Space>te :tabnew<CR>
 inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
 
+filetype plugin on
+
+autocmd FileType ruby setl tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType php,inc :set dictionary=~/.vim/dict/php.dict
 autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
 
-filetype plugin on
 
 "neocomplecache
 let g:neocomplcache_enable_at_startup = 1
