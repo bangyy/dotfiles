@@ -151,6 +151,34 @@ map ,c<space> <plug>NERDCommenterToggle
 vmap ,s<space> <Plug>NERDCommenterSexy
 vmap ,b<space> <Plug>NERDCommenterMinimal
 
+"vimshell
+"nnoremap <Space>s :VimShellTab<CR>
+nnoremap si :VimShell<CR>
+nnoremap st :VimShellTab<CR>
+nmap <buffer> sv <Plug>(vimshell_split_switch)
+"nmap <buffer> <Space>s <Plug>(vimshell_split_switch)
+let g:vimshell_prompt = '$ '
+let g:vimshell_user_prompt = '"[" . $USER . "@" . hostname() . ": " . getcwd() . "]"'
+"let g:vimshell_split_command = "vsplit"
+"https://github.com/eagletmt/dotfiles/blob/master/dot.vimrc
+augroup MyVimShell
+    autocmd!
+    autocmd FileType vimshell nunmap <buffer> q
+    autocmd FileType vimshell nunmap <buffer> <C-n>
+    autocmd FileType vimshell nunmap <buffer> <C-p>
+    autocmd FileType vimshell nunmap <buffer> <C-l>
+    autocmd FileType vimshell nnoremap <buffer> q :close<CR>
+
+    "autocmd FileType int-* nunmap <buffer> q
+    "autocmd FileType int-* nunmap <buffer> <C-n>
+    "autocmd FileType int-* nmap <buffer> K <Plug>(vimshell_int_previous_prompt)
+    "autocmd FileType int-* nunmap <buffer> <C-p>
+    "autocmd FileType int-* nmap <buffer> J <Plug>(vimshell_int_next_prompt)
+augroup END
+
+"vimfiler
+"let g:vimfiler_as_default_explorer = 1
+
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
 autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py

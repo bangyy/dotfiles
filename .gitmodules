@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/vimfiler"]
 	path = .vim/bundle/vimfiler
 	url = git://github.com/Shougo/vimfiler.git
+[submodule ".vim/bundle/html5.vim"]
+	path = .vim/bundle/html5.vim
+	url = git://github.com/othree/html5.vim.git
