@@ -27,6 +27,7 @@ set wildmenu
 
 set textwidth=0
 set wrap
+set ambiwidth=double
 
 syntax on
 set t_Co=256
