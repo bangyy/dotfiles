@@ -10,27 +10,28 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
 export LANG=ja_JP.UTF-8
 
-autoload colors
-colors
-case ${UID} in
-0)
-    PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-    PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-    SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    ;;
-*)
-    PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-    PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-    SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    ;;
-esac
+
+#autoload colors
+#colors
+#case ${UID} in
+#0)
+    #PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
+    #PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
+    #SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
+    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+        #PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    #;;
+#*)
+    #PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
+    #PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
+    #SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
+    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+        #PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    #;;
+#esac
 
 ###############こまごまとした設定###############
 
@@ -90,7 +91,21 @@ compinit
 #function ssh_screen(){}
 
 PROMPT=$'%B%{\e[32m%}[%n@%M: %~]'$'\n$%b%{\e[m%} ' ;
-RPROMPT="[%t]"
+
+#http://d.hatena.ne.jp/mollifier/20090814/p1
+autoload -Uz vcs_info
+#zstyle ':vcs_info:*' formats '(%s)-[%b]'
+#zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+zstyle ':vcs_info:*' formats '[%b @%s]'
+zstyle ':vcs_info:*' actionformats '[%b(%a) @%s]'
+precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+RPROMPT="%1(v|%F{green}%1v%f|)"
+#RPROMPT="[%t]"
+
 SPROMPT="correct: %R -> %r ? " 
 
 setopt complete_aliases     #エイリアスを設定したコマンドでも補完機能を使えるようにする
