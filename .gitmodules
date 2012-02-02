@@ -31,9 +31,6 @@
 [submodule ".vim/bundle/vimproc"]
 	path = .vim/bundle/vimproc
 	url = git://github.com/Shougo/vimproc.git
-[submodule ".vim/bundle/jslint.vim"]
-	path = .vim/bundle/jslint.vim
-	url = git://github.com/hallettj/jslint.vim.git
 [submodule ".vim/bundle/lucius"]
 	path = .vim/bundle/lucius
 	url = git://github.com/vim-scripts/Lucius.git
@@ -46,3 +43,6 @@
 [submodule ".vim/bundle/html5.vim"]
 	path = .vim/bundle/html5.vim
 	url = git://github.com/othree/html5.vim.git
+[submodule ".vim/bundle/vim-powerline"]
+	path = .vim/bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
