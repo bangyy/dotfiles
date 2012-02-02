@@ -96,15 +96,14 @@ PROMPT=$'%B%{\e[32m%}[%n@%M: %~]'$'\n$%b%{\e[m%} ' ;
 autoload -Uz vcs_info
 #zstyle ':vcs_info:*' formats '(%s)-[%b]'
 #zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-zstyle ':vcs_info:*' formats '[%b @%s]'
-zstyle ':vcs_info:*' actionformats '[%b(%a) @%s]'
+zstyle ':vcs_info:*' formats '%b @%s'
+zstyle ':vcs_info:*' actionformats '%b(%a) @%s'
 precmd () {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
-RPROMPT="%1(v|%F{green}%1v%f|)"
-#RPROMPT="[%t]"
+RPROMPT="[%1(v|%F{green}%1v%f - |)%T]"
 
 SPROMPT="correct: %R -> %r ? " 
 
