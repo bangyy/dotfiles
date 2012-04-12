@@ -22,7 +22,6 @@ set laststatus=2
 set showmatch
 set matchtime=2
 set hlsearch
-highlight Comment ctermfg=DarkCyan
 set wildmenu
 
 set textwidth=0
@@ -32,10 +31,9 @@ set ambiwidth=double
 syntax on
 set t_Co=256
 
-
-
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
 highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
+highlight Comment ctermfg=DarkCyan
 
 set autoindent
 set tabstop=4
@@ -59,12 +57,6 @@ augroup cch
     autocmd WinEnter,BufRead * set cursorline
 augroup END
 
-":hi clear CursorLine
-"highlight CursorLine ctermbg=lightgray
-                   
-"Escの2回押しでハイライト消去
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
-
 if has("autocmd")
     " ファイルタイプ別インデント、プラグインを有効にする
     filetype plugin indent on
@@ -80,20 +72,14 @@ set shortmess+=I
 set clipboard=unnamed
 au BufEnter * execute ":lcd " . expand("%:p:h") 
 
-"pathoge.vim
-call pathogen#runtime_append_all_bundles()
-
-map tl gt
-map th gT
-
-
-map gl <C-w>l
-map gh <C-w>h
-map <C-h> gT
-map <C-l> gt
-
 map j gj
 map k gk
+nnoremap <S-h> gT
+nnoremap <S-l> gt
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 noremap : ;
 noremap ; :
@@ -103,8 +89,11 @@ nnoremap <Space>v :vnew
 nnoremap <Space>t :tabnew
 nnoremap <Space>te :tabnew<CR>
 
-inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
+"Escの2回押しでハイライト消去
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
+nnoremap ,s<Space> :source $MYVIMRC<CR>
+inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
 filetype plugin on
 
@@ -112,17 +101,11 @@ autocmd FileType ruby setl tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType php,inc :set dictionary=~/.vim/dict/php.dict
 autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
 
+"pathoge.vim
+call pathogen#runtime_append_all_bundles()
 
 "neocomplecache
 let g:neocomplcache_enable_at_startup = 1
-"let g:NeoComplCache_DictionaryFileTypeLists = {
-"            \ 'default' : '',
-"            \ 'vimshell' : $HOME.'/.vimshell_hist',
-"            \ 'php' : $HOME.'/.vim/dict/PHP.dict',
-"            \ 'inc' : $HOME.'/.vim/dict/PHP.dict',
-"            \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-"            \ 'scheme' : $HOME.'/.gosh_completions'
-"            \ }
 
 let g:NeoComplCache_MaxTryKeywordLength=100
 let g:neocomplcache_enable_underbar_completion = 1
@@ -169,12 +152,6 @@ augroup MyVimShell
     autocmd FileType vimshell nunmap <buffer> <C-p>
     autocmd FileType vimshell nunmap <buffer> <C-l>
     autocmd FileType vimshell nnoremap <buffer> q :close<CR>
-
-    "autocmd FileType int-* nunmap <buffer> q
-    "autocmd FileType int-* nunmap <buffer> <C-n>
-    "autocmd FileType int-* nmap <buffer> K <Plug>(vimshell_int_previous_prompt)
-    "autocmd FileType int-* nunmap <buffer> <C-p>
-    "autocmd FileType int-* nmap <buffer> J <Plug>(vimshell_int_next_prompt)
 augroup END
 
 "vimfiler
@@ -184,7 +161,29 @@ autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
 autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
 
-colorscheme lucius
+"colorscheme lucius
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+
+"jslint.vim
+"let $JS_CMD='node'
+"nnoremap cn :cn<CR>
+augroup MyGroup
+    autocmd! MyGroup
+    autocmd FileType javascript call s:javascript_filetype_settings()
+    autocmd FileType javascript nnoremap <buffer> s :call jslint#check()<CR>
+augroup END
+
+function! s:javascript_filetype_settings()
+    autocmd BufLeave     <buffer> call jslint#clear()
+    autocmd BufWritePost <buffer> call jslint#check()
+    autocmd CursorMoved  <buffer> call jslint#message()
+endfunction
+
+"vim-powerline
+"let g:Powerline_symbols = 'fancy'
 
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
