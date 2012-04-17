@@ -67,6 +67,24 @@ if has("autocmd")
   \ endif
 endif
 
+function! HighLightZenkakuSpace()
+    syntax match ZenkakuSpace /　/ display containedin=ALL
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endf
+
+function! HighLightHankakuSpace()
+    syntax match HankakuSpace / / display containedin=ALL
+    highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+endf
+
+if has('syntax')
+    augroup highlightSpace
+        autocmd! highlightSpace
+        autocmd BufNew,BufRead * call HighLightZenkakuSpace()
+        autocmd BufNew,BufRead * call HighLightHankakuSpace()
+    augroup END
+endif
+
 set hidden
 set shortmess+=I
 set clipboard=unnamed
@@ -177,15 +195,10 @@ augroup MyGroup
 augroup END
 
 function! s:javascript_filetype_settings()
-    autocmd BufLeave     <buffer> call jslint#clear()
-    autocmd BufWritePost <buffer> call jslint#check()
-    autocmd CursorMoved  <buffer> call jslint#message()
+    autocmd BufLeave     nnoremap <buffer> call jslint#clear()
+    autocmd BufWritePost nnoremap <buffer> call jslint#check()
+    autocmd CursorMoved  <nnoremap buffer> call jslint#message()
 endfunction
 
 "vim-powerline
 "let g:Powerline_symbols = 'fancy'
-
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
-highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-match HankakuSpace / /
