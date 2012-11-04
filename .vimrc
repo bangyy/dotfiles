@@ -1,4 +1,41 @@
+"----------------------------------------
+"" plugin - NeoBundle
+"----------------------------------------
 set nocompatible
+filetype plugin indent off
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+NeoBundle 'git://github.com/tpope/vim-surround.git'
+NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+"NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
+NeoBundle 'git://github.com/msanders/snipmate.vim.git'
+NeoBundle 'git://github.com/scrooloose/nerdtree.git'
+NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
+NeoBundle 'git://github.com/Shougo/vimshell.git'
+NeoBundle 'git://github.com/thinca/vim-quickrun.git'
+NeoBundle 'git://github.com/mattn/zencoding-vim.git'
+NeoBundle 'git://github.com/Shougo/vimproc.git'
+NeoBundle 'git://github.com/mileszs/ack.vim.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/othree/html5.vim.git'
+NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
+NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
+NeoBundle 'git://github.com/othree/eregex.vim.git'
+NeoBundle 'git://github.com/tpope/vim-repeat.git'
+NeoBundle 'git://github.com/scrooloose/syntastic.git'
+NeoBundle 'git://github.com/thinca/vim-ref.git'
+NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
+NeoBundle 'git://github.com/kana/vim-smartchr.git'
+
+filetype plugin indent on
+
 set fileformats=unix,dos,mac
 set vb t_vb=
 set backspace=indent,eol,start
@@ -25,10 +62,13 @@ set hlsearch
 set wildmenu
 
 set textwidth=0
+"http://d.hatena.ne.jp/WK6/20120606/1338993826
+autocmd FileType text setlocal textwidth=0
 set wrap
 set ambiwidth=double
 
 syntax on
+syntax enable
 set t_Co=256
 
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
@@ -69,12 +109,13 @@ endif
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL
-    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
 endf
 
 function! HighLightHankakuSpace()
     syntax match HankakuSpace / / display containedin=ALL
-    highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+    "highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+    highlight HankakuSpace cterm=underline ctermfg=darkgray
 endf
 
 if has('syntax')
@@ -89,6 +130,8 @@ set hidden
 set shortmess+=I
 set clipboard=unnamed
 au BufEnter * execute ":lcd " . expand("%:p:h") 
+
+source $VIMRUNTIME/macros/matchit.vim
 
 map j gj
 map k gk
@@ -113,14 +156,14 @@ nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 nnoremap ,s<Space> :source $MYVIMRC<CR>
 inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
-filetype plugin on
+"filetype plugin on
 
 autocmd FileType ruby setl tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType php,inc :set dictionary=~/.vim/dict/php.dict
 autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
 
 "pathoge.vim
-call pathogen#runtime_append_all_bundles()
+"call pathogen#runtime_append_all_bundles()
 
 "neocomplecache
 let g:neocomplcache_enable_at_startup = 1
@@ -143,6 +186,7 @@ nnoremap ,t :NERDTree<CR>
 nnoremap <Space>f :Unite file<CR>
 nnoremap <Space>u :Unite buffer<CR>
 "let g:unite_enable_split_vertically=1
+let g:unite_enable_start_insert=1
 let g:unite_winwidth=40
 
 "NERD_commenter.vim
@@ -150,6 +194,9 @@ let g:NERDCreateDefaultMappings = 0
 let NERDShutUp = 1
 "let NERDSpaceDelims = 1
 map ,c<space> <plug>NERDCommenterToggle
+" C-_ map works as C-/
+" http://vim.1045645.n5.nabble.com/How-to-map-Ctrl-td1192843.html
+map <C-_> <plug>NERDCommenterToggle
 vmap ,s<space> <Plug>NERDCommenterSexy
 vmap ,b<space> <Plug>NERDCommenterMinimal
 
@@ -173,14 +220,18 @@ augroup MyVimShell
 augroup END
 
 "vimfiler
-"let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_as_default_explorer = 1
+command Vf VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
 
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
 autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
 
-"colorscheme lucius
-syntax enable
+"colorscheme solarized
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
@@ -201,4 +252,4 @@ function! s:javascript_filetype_settings()
 endfunction
 
 "vim-powerline
-"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
