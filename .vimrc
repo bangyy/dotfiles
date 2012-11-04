@@ -60,6 +60,7 @@ set showmatch
 set matchtime=2
 set hlsearch
 set wildmenu
+set splitright
 
 set textwidth=0
 "http://d.hatena.ne.jp/WK6/20120606/1338993826
@@ -80,7 +81,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set smarttab 
+set smarttab
 
 set encoding=utf-8
 set termencoding=utf-8
