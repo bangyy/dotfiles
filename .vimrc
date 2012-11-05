@@ -33,6 +33,7 @@ NeoBundle 'git://github.com/scrooloose/syntastic.git'
 NeoBundle 'git://github.com/thinca/vim-ref.git'
 NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
 NeoBundle 'git://github.com/kana/vim-smartchr.git'
+NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
 
 filetype plugin indent on
 
@@ -106,25 +107,6 @@ if has("autocmd")
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal g`\"" |
   \ endif
-endif
-
-function! HighLightZenkakuSpace()
-    syntax match ZenkakuSpace /　/ display containedin=ALL
-    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
-endf
-
-function! HighLightHankakuSpace()
-    syntax match HankakuSpace / / display containedin=ALL
-    "highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-    highlight HankakuSpace cterm=underline ctermfg=darkgray
-endf
-
-if has('syntax')
-    augroup highlightSpace
-        autocmd! highlightSpace
-        autocmd BufNew,BufRead * call HighLightZenkakuSpace()
-        autocmd BufNew,BufRead * call HighLightHankakuSpace()
-    augroup END
 endif
 
 set hidden
@@ -252,5 +234,28 @@ function! s:javascript_filetype_settings()
     autocmd CursorMoved  <nnoremap buffer> call jslint#message()
 endfunction
 
+"accelerated-jk
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
 "vim-powerline
 let g:Powerline_symbols = 'fancy'
+
+function! HighLightZenkakuSpace()
+    syntax match ZenkakuSpace /　/ display containedin=ALL
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
+endf
+
+function! HighLightHankakuSpace()
+    syntax match HankakuSpace / / display containedin=ALL
+    "highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+    highlight HankakuSpace cterm=underline ctermfg=darkgray
+endf
+
+if has('syntax')
+    augroup highlightSpace
+        autocmd! highlightSpace
+        autocmd BufNew,BufRead * call HighLightZenkakuSpace()
+        autocmd BufNew,BufRead * call HighLightHankakuSpace()
+    augroup END
+endif
