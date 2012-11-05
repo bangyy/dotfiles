@@ -4,17 +4,17 @@
 	#   %/ 現在のディレクトリ。
 	#   ${fg[color]}文字色の設定。fgの部分をbgにすると背景色の設定。エスケープシークエンスで設定することもできる。
 
-#export SCREENDIR=${HOME}/.screen
 export SCREENDIR=${HOME}/screen
 export LSCOLORS=gxfxcxdxbxegedabagacad
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
+#export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools
 export LANG=ja_JP.UTF-8
 
 
-#autoload colors
+autoload colors
 #colors
 #case ${UID} in
 #0)
@@ -90,20 +90,28 @@ compinit
 #predict-off
 #function ssh_screen(){}
 
-PROMPT=$'%B%{\e[32m%}[%n@%M: %~]'$'\n$%b%{\e[m%} ' ;
+#PROMPT=%F{cyan}[%n@%M\:' '%~]%f$'\n'%F{cyan}$%f' '
+PROMPT=%(?.%F{cyan}.%F{red})[%n@%M\:' '%~]$'\n'$%f' '
 
 #http://d.hatena.ne.jp/mollifier/20090814/p1
+#http://d.hatena.ne.jp/NeoCat/20120822/1345657535
 autoload -Uz vcs_info
 #zstyle ':vcs_info:*' formats '(%s)-[%b]'
 #zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
 zstyle ':vcs_info:*' formats '%b @%s'
 zstyle ':vcs_info:*' actionformats '%b(%a) @%s'
-precmd () {
+
+function _precmd_vcs_info () {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
-RPROMPT="[%1(v|%F{green}%1v%f - |)%T]"
+
+# add-zsh-hook
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _precmd_vcs_info
+
+RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
 
 SPROMPT="correct: %R -> %r ? " 
 
@@ -114,7 +122,12 @@ alias mv='mv -vi'
 alias rm='rm -v'
 alias cp='cp -vi'
 alias cdd='cd ..'
-alias vi='vim -p'
+#alias vi='vim'
+#http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
+export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias screen='/usr/local/bin/screen'
 #alias ssh='ssh_screen'
 
 if [ $SHLVL = 1 ];then
@@ -128,10 +141,27 @@ if [[ -f ~/.nvm/nvm.sh ]]; then
     source ~/.nvm/nvm.sh
 
     if which nvm >/dev/null 2>&1 ;then
-        _nodejs_use_version="latest"
+        _nodejs_use_version="stable"
         if nvm ls | grep -F -e "${_nodejs_use_version}" >/dev/null 2>&1 ;then
             nvm use "${_nodejs_use_version}" >/dev/null
         fi
         unset _nodejs_use_version
     fi
+fi
+
+#実行中のコマンドまたはカレントディレクトリの表示
+#.screenrcでterm xterm-256colorと設定している場合
+if [ $TERM = xterm-256color ];then
+    preexec() {
+        #echo -ne "\ek#${1%% *}\e\\"
+        echo -ne "\ek${1%% *}\e\\"
+    }
+    precmd() {
+        echo -ne "\ek$(basename $(pwd))\e\\"
+    }
+fi
+# phpenv
+if [ -f ${HOME}/.phpenv/bin/phpenv ]; then
+    export PATH=${PATH}:${HOME}/.phpenv/bin
+    eval "$(phpenv init -)"
 fi
