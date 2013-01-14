@@ -16,7 +16,7 @@ NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 "NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/msanders/snipmate.vim.git'
-NeoBundle 'git://github.com/scrooloose/nerdtree.git'
+"NeoBundle 'git://github.com/scrooloose/nerdtree.git'
 NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
@@ -34,6 +34,8 @@ NeoBundle 'git://github.com/thinca/vim-ref.git'
 NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
 NeoBundle 'git://github.com/kana/vim-smartchr.git'
 NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
+NeoBundle 'git://github.com/vim-scripts/Align.git'
+NeoBundle 'git://github.com/tpope/vim-fugitive.git'
 
 filetype plugin indent on
 
@@ -160,10 +162,10 @@ endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 " NERD_tree
-let g:NERDTreeShowHidden = 1
+"let g:NERDTreeShowHidden = 1
 "let g:NERDChristmasTree = 1
 "let g:NERDTreeShowFiles = 1
-nnoremap ,t :NERDTree<CR>
+"nnoremap ,t :NERDTree<CR>
 
 "unite.vim
 nnoremap <Space>f :Unite file<CR>
@@ -209,6 +211,12 @@ command Vf VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -n
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
+augroup MyVimShell
+    autocmd!
+    autocmd FileType vimfiler nunmap <buffer> <C-l>
+    autocmd FileType vimfiler nunmap <buffer> <S-l>
+    autocmd FileType vimfiler nunmap <buffer> <S-h>
+augroup END
 
 autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
 autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
@@ -240,6 +248,19 @@ nmap k <Plug>(accelerated_jk_gk)
 
 "vim-powerline
 let g:Powerline_symbols = 'fancy'
+
+"align.vim
+let g:Align_xstrlen=3
+
+"vim-fugitive.git
+nnoremap <silent> <Space>gb :Gblame<CR>
+nnoremap <silent> <Space>gd :Gdiff<CR>
+nnoremap <silent> <Space>gs :Gstatus<CR>
+nnoremap <silent> <Space>gl :Glog<CR>
+nnoremap <silent> <Space>ga :Gwrite<CR>
+nnoremap <silent> <Space>gc :Gcommit<CR>
+nnoremap <silent> <Space>gC :Git commit --amend<CR>
+
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL
