@@ -214,6 +214,7 @@ let g:vimfiler_marked_file_icon = '*'
 augroup MyVimShell
     autocmd!
     autocmd FileType vimfiler nunmap <buffer> <C-l>
+    autocmd FileType vimfiler nunmap <buffer> <C-j>
     autocmd FileType vimfiler nunmap <buffer> <S-l>
     autocmd FileType vimfiler nunmap <buffer> <S-h>
 augroup END
