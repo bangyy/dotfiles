@@ -21,7 +21,12 @@ NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'git://github.com/mattn/zencoding-vim.git'
-NeoBundle 'git://github.com/Shougo/vimproc.git'
+NeoBundle 'git://github.com/Shougo/vimproc.git', {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 NeoBundle 'git://github.com/mileszs/ack.vim.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.git'
 NeoBundle 'git://github.com/othree/html5.vim.git'
@@ -36,6 +41,10 @@ NeoBundle 'git://github.com/kana/vim-smartchr.git'
 NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
 NeoBundle 'git://github.com/vim-scripts/Align.git'
 NeoBundle 'git://github.com/tpope/vim-fugitive.git'
+NeoBundle 'git://github.com/jiangmiao/simple-javascript-indenter.git'
+NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
+NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
+NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 
 filetype plugin indent on
 
@@ -170,6 +179,7 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 "unite.vim
 nnoremap <Space>f :Unite file<CR>
 nnoremap <Space>u :Unite buffer<CR>
+nnoremap <Space>o :Unite outline<CR>
 "let g:unite_enable_split_vertically=1
 let g:unite_enable_start_insert=1
 let g:unite_winwidth=40
@@ -262,6 +272,25 @@ nnoremap <silent> <Space>ga :Gwrite<CR>
 nnoremap <silent> <Space>gc :Gcommit<CR>
 nnoremap <silent> <Space>gC :Git commit --amend<CR>
 
+"syntastic
+" このようにするとjshintを必ず使ってチェックしてくれるようになる
+let g:syntastic_mode_map = {
+            \ 'mode': 'active',
+            \ 'active_filetypes': ['javascript', 'php', 'ruby', 'css'],
+            \ 'passive_filetypes': ['html']
+            \ }
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_javascript_checker = "jshint"
+
+"http://layzie.hatenablog.com/entry/20130122/1358811539
+"Simple-Javascript-Indenter
+" この設定入れるとswitchのインデントがいくらかマシに
+let g:SimpleJsIndenter_CaseIndentLevel = -1
+
+"http://layzie.hatenablog.com/entry/20130122/1358811539
+"jscomplete-vim
+" DOMとMozilla関連とES6のメソッドを補完
+let g:jscomplete_use = ['dom', 'moz', 'es6th']
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL

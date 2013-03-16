@@ -4,7 +4,7 @@
 	#   %/ 現在のディレクトリ。
 	#   ${fg[color]}文字色の設定。fgの部分をbgにすると背景色の設定。エスケープシークエンスで設定することもできる。
 
-export SCREENDIR=${HOME}/screen
+export SCREENDIR=${HOME}/.screen
 export LSCOLORS=gxfxcxdxbxegedabagacad
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
@@ -70,6 +70,27 @@ bindkey "^p" history-beginning-search-backward-end
 bindkey "^n" history-beginning-search-forward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "\\en" history-beginning-search-forward-end
+
+#http://shibayu36.hatenablog.com/entry/20120130/1327937835
+#http://d.hatena.ne.jp/syohex/20121219/1355925874
+#cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 5000
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':completion:*' recent-dirs-insert both
+
+source ~/.zsh/zaw/zaw.zsh
+zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
+#bindkey '^@' zaw-cdr # zaw-cdrをbindkey
+bindkey '^f' zaw-cdr # zaw-cdrをbindkey
+
+#http://d.hatena.ne.jp/naoya/20130108/1357630895
+# z
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+    z --add "$(pwd -P)"
+}
 
 
 #履歴の保持数と履歴ファイルの設定
@@ -165,3 +186,6 @@ if [ -f ${HOME}/.phpenv/bin/phpenv ]; then
     export PATH=${PATH}:${HOME}/.phpenv/bin
     eval "$(phpenv init -)"
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
