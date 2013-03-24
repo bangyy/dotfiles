@@ -13,9 +13,8 @@ NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
 NeoBundle 'git://github.com/tpope/vim-surround.git'
 NeoBundle 'git://github.com/Shougo/unite.vim.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-"NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
-NeoBundle 'git://github.com/msanders/snipmate.vim.git'
+"NeoBundle 'git://github.com/msanders/snipmate.vim.git'
 "NeoBundle 'git://github.com/scrooloose/nerdtree.git'
 NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
@@ -45,6 +44,8 @@ NeoBundle 'git://github.com/jiangmiao/simple-javascript-indenter.git'
 NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
 NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
+NeoBundle 'git://github.com/Shougo/neosnippet.git'
+NeoBundle 'git://github.com/honza/snipmate-snippets.git'
 
 filetype plugin indent on
 
@@ -169,6 +170,10 @@ if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+if !exists('g:neocomplcache_same_filetype_lists')
+    let g:neocomplcache_same_filetype_lists = {}
+endif
+let g:neocomplcache_same_filetype_lists['html'] = 'xhtml,javascript'
 
 " NERD_tree
 "let g:NERDTreeShowHidden = 1
@@ -291,6 +296,21 @@ let g:SimpleJsIndenter_CaseIndentLevel = -1
 "jscomplete-vim
 " DOMとMozilla関連とES6のメソッドを補完
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
+
+" neosnippet.vim
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+set completeopt-=preview
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL
