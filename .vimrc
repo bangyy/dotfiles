@@ -45,7 +45,7 @@ NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
 NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/Shougo/neosnippet.git'
-NeoBundle 'git://github.com/honza/snipmate-snippets.git'
+NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
 
 filetype plugin indent on
 
