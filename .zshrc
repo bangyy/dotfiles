@@ -15,23 +15,6 @@ export LANG=ja_JP.UTF-8
 
 
 autoload colors
-#colors
-#case ${UID} in
-#0)
-    #PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-    #PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-    #SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-        #PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    #;;
-#*)
-    #PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-    #PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-    #SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-        #PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    #;;
-#esac
 
 ###############こまごまとした設定###############
 
@@ -108,19 +91,16 @@ compinit
 
 #タブを押さなくても補完候補を表示する
 #autoload predict-on
-#predict-off
+#predict-on
 #function ssh_screen(){}
-
-#PROMPT=%F{cyan}[%n@%M\:' '%~]%f$'\n'%F{cyan}$%f' '
-PROMPT=%(?.%F{cyan}.%F{red})[%n@%M\:' '%~]$'\n'$%f' '
 
 #http://d.hatena.ne.jp/mollifier/20090814/p1
 #http://d.hatena.ne.jp/NeoCat/20120822/1345657535
 autoload -Uz vcs_info
 #zstyle ':vcs_info:*' formats '(%s)-[%b]'
 #zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-zstyle ':vcs_info:*' formats '%b @%s'
-zstyle ':vcs_info:*' actionformats '%b(%a) @%s'
+zstyle ':vcs_info:*' formats '%b@%s'
+zstyle ':vcs_info:*' actionformats '%b(%a)@%s'
 
 function _precmd_vcs_info () {
     psvar=()
@@ -132,8 +112,16 @@ function _precmd_vcs_info () {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _precmd_vcs_info
 
-RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
 
+#PROMPT=%(?.%F{cyan}.%F{red})[%n@%M\:' '%~]$'\n'$%f' '
+#experimental
+#PROMPT=%(?.%F{cyan}.%F{red})'┃ _┃ '$%f' '
+PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')$%f' '
+#PROMPT=%(?.%F{cyan}' | _ | '.%F{red}' > _ < ')$%f' '
+#RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
+#experimental
+#RPROMPT=[%M:%~' '%1(v|%F{green}%1v%f - |)%(!.#.%T)]
+RPROMPT=%1(v|%F{green}'('%1v')'%f|)[%M:%~' '%(!.#.%T)]
 SPROMPT="correct: %R -> %r ? " 
 
 setopt complete_aliases     #エイリアスを設定したコマンドでも補完機能を使えるようにする

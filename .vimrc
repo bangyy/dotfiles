@@ -92,7 +92,7 @@ highlight Comment ctermfg=DarkCyan
 set autoindent
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 set smarttab
 
@@ -197,8 +197,8 @@ map ,c<space> <plug>NERDCommenterToggle
 " C-_ map works as C-/
 " http://vim.1045645.n5.nabble.com/How-to-map-Ctrl-td1192843.html
 map <C-_> <plug>NERDCommenterToggle
-vmap ,s<space> <Plug>NERDCommenterSexy
-vmap ,b<space> <Plug>NERDCommenterMinimal
+vmap /s <Plug>NERDCommenterSexy
+vmap /b <Plug>NERDCommenterMinimal
 
 "vimshell
 "nnoremap <Space>s :VimShellTab<CR>
@@ -282,7 +282,7 @@ nnoremap <silent> <Space>gC :Git commit --amend<CR>
 let g:syntastic_mode_map = {
             \ 'mode': 'active',
             \ 'active_filetypes': ['javascript', 'php', 'ruby', 'css'],
-            \ 'passive_filetypes': ['html']
+            \ 'passive_filetypes': ['html', 'xml']
             \ }
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checker = "jshint"
