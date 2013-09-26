@@ -116,7 +116,8 @@ add-zsh-hook precmd _precmd_vcs_info
 #PROMPT=%(?.%F{cyan}.%F{red})[%n@%M\:' '%~]$'\n'$%f' '
 #experimental
 #PROMPT=%(?.%F{cyan}.%F{red})'┃ _┃ '$%f' '
-PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')$%f' '
+#PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')$%f' '
+PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\<%f' '
 #PROMPT=%(?.%F{cyan}' | _ | '.%F{red}' > _ < ')$%f' '
 #RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
 #experimental
