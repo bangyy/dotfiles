@@ -6,6 +6,7 @@ filetype plugin indent off
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
+  set shortmess+=I
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
@@ -99,30 +100,29 @@ set smarttab
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,euc-jp,cp932,iso-2022-jp
-set fileencodings+=,ucs-2le,ucs-2
+set fileencodings=utf-8,ucs-bom,euc-jp,cp932,iso-2022-jp,ucs-2le,ucs-2
 
 "http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 set cursorline
 " カレントウィンドウにのみ罫線を引く
 augroup cch
-    autocmd! cch
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter,BufRead * set cursorline
+    autocmd!
+    autocmd WinLeave * setlocal nocursorline
+    autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
 
-if has("autocmd")
-    " ファイルタイプ別インデント、プラグインを有効にする
-    filetype plugin indent on
-    " カーソル位置を記憶する
+" ファイルタイプ別インデント、プラグインを有効にする
+filetype plugin indent on
+" カーソル位置を記憶する
+augroup CursorPos
+    autocmd!
     autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal g`\"" |
-  \ endif
-endif
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+augroup END
 
 set hidden
-set shortmess+=I
 set clipboard=unnamed
 au BufEnter * execute ":lcd " . expand("%:p:h") 
 
@@ -153,9 +153,12 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
 "filetype plugin on
 
-autocmd FileType ruby setl tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType php,inc :set dictionary=~/.vim/dict/php.dict
-autocmd FileType javascript :set dictionary=~/.vim/dict/javascript.dict
+augroup Dict
+  autocmd!
+  autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType php,inc setlocal dictionary+=~/.vim/dict/php.dict
+  autocmd FileType javascript setlocal dictionary+=~/.vim/dict/javascript.dict
+augroup END
 
 "pathoge.vim
 "call pathogen#runtime_append_all_bundles()
@@ -221,12 +224,12 @@ augroup END
 
 "vimfiler
 let g:vimfiler_as_default_explorer = 1
-command Vf VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit
+command! Vf VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit
 " Like Textmate icons.
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-augroup MyVimShell
+augroup MyVimFiler
     autocmd!
     autocmd FileType vimfiler nunmap <buffer> <C-l>
     autocmd FileType vimfiler nunmap <buffer> <C-j>
@@ -234,9 +237,12 @@ augroup MyVimShell
     autocmd FileType vimfiler nunmap <buffer> <S-h>
 augroup END
 
-autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
-autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
-autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
+augroup Template
+  autocmd!
+  autocmd BufNewFile *.php,*.inc 0r ~/.vim/template/template.php
+  autocmd BufNewFile *.html,*.tpl 0r ~/.vim/template/template.html
+  autocmd BufNewFile *.py,*.tpl 0r ~/.vim/template/template.py
+augroup END
 
 "colorscheme solarized
 set background=dark
@@ -246,8 +252,8 @@ let g:solarized_termcolors=256
 "jslint.vim
 "let $JS_CMD='node'
 "nnoremap cn :cn<CR>
-augroup MyGroup
-    autocmd! MyGroup
+augroup MyJsLint
+    autocmd!
     autocmd FileType javascript call s:javascript_filetype_settings()
     autocmd FileType javascript nnoremap <buffer> s :call jslint#check()<CR>
 augroup END
@@ -312,21 +318,30 @@ endif
 let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 set completeopt-=preview
 
-function! HighLightZenkakuSpace()
-    syntax match ZenkakuSpace /　/ display containedin=ALL
-    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
-endf
+"function! HighLightZenkakuSpace()
+    "syntax match ZenkakuSpace /　/ display containedin=ALL
+    "highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
+"endf
 
-function! HighLightHankakuSpace()
-    syntax match HankakuSpace / / display containedin=ALL
+"function! HighLightHankakuSpace()
+    "syntax match HankakuSpace / / display containedin=ALL
     "highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-    highlight HankakuSpace cterm=underline ctermfg=darkgray
-endf
+"endf
 
-if has('syntax')
-    augroup highlightSpace
-        autocmd! highlightSpace
-        autocmd BufNew,BufRead * call HighLightZenkakuSpace()
-        autocmd BufNew,BufRead * call HighLightHankakuSpace()
-    augroup END
-endif
+"augroup highlightSpace
+  "autocmd!
+  "autocmd BufNew,BufRead * call HighLightZenkakuSpace()
+  "autocmd BufNew,BufRead * call HighLightHankakuSpace()
+"augroup END
+
+"augroup highlightHankakuSpace
+  "autocmd!
+  "autocmd VimEnter,ColorScheme * highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+  "autocmd VimEnter,WinEnter * match HankakuSpace / /
+"augroup END
+
+augroup highlightZenkakuSpace
+  autocmd!
+  autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
+  autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+augroup END
