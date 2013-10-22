@@ -127,11 +127,13 @@ SPROMPT="correct: %R -> %r ? "
 
 setopt complete_aliases     #エイリアスを設定したコマンドでも補完機能を使えるようにする
 alias mysqlcon='mysql -u bangyy -p -h mysql102.db.sakura.ne.jp'
+alias ls='ls -G'
 alias ll='ls -laoG'
 alias mv='mv -vi'
 alias rm='rm -v'
 alias cp='cp -vi'
 alias cdd='cd ..'
+alias grep='grep --color=auto'
 #alias vi='vim'
 #http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
