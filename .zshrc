@@ -67,6 +67,8 @@ source ~/.zsh/zaw/zaw.zsh
 zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
 #bindkey '^@' zaw-cdr # zaw-cdrをbindkey
 bindkey '^f' zaw-cdr # zaw-cdrをbindkey
+bindkey '^h' zaw-history
+bindkey '^g' zaw-gitdir
 
 #http://d.hatena.ne.jp/naoya/20130108/1357630895
 # z
@@ -117,7 +119,8 @@ add-zsh-hook precmd _precmd_vcs_info
 #experimental
 #PROMPT=%(?.%F{cyan}.%F{red})'┃ _┃ '$%f' '
 #PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')$%f' '
-PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\<%f' '
+#PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\<%f' '
+PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\{%f' '
 #PROMPT=%(?.%F{cyan}' | _ | '.%F{red}' > _ < ')$%f' '
 #RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
 #experimental
