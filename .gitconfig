@@ -1,0 +1,35 @@
+[user]
+	name = bangyy
+	email = bang.yy.321@gmail.com
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/bang/.gitignore
+[merge]
+	tool = vimdiff
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+	diff = auto
+	grep = auto
+[tig "bind"]
+	generic = g move-first-line
+	generic = G move-last-line
+[alias]
+	ci = commit
+	co = checkout
+	br = branch
+	ad = add
+	up = pull --rebase
+	rbm = rebase master
+	di = diff
+	st = status
+	cl = clone --recursive
+	ls = log --stat
+	wc = whatchanged
+	sp = stash pop
+	bl = blame
+	lg = log --graph --pretty='format:%C(yellow)%h%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset'
+	lf = log --graph --name-status --pretty='format:%C(red)%h %C(green)%an %Creset%s %C(yellow)%d%Creset'
+[push]
+	default = simple
