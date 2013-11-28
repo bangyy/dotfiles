@@ -10,7 +10,8 @@ zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 #export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools
+#export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools:/usr/local/Cellar/git
 export LANG=ja_JP.UTF-8
 
 
@@ -145,8 +146,19 @@ alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"
 alias screen='/usr/local/bin/screen'
 #alias ssh='ssh_screen'
 
-if [ $SHLVL = 1 ];then
-    screen -xR
+#if [ $SHLVL = 1 ];then
+    #screen -xR
+#fi
+if [ -z "$TMUX" -a -z "$STY" ]; then
+  if type tmuxx >/dev/null 2>&1; then
+    tmuxx
+  elif type tmux >/dev/null 2>&1; then
+    if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
+      tmux attach && echo "tmux attached session "
+    else
+      tmux new-session && echo "tmux created new session"
+    fi
+  fi
 fi
 
 #http://d.hatena.ne.jp/mollifier/20110221/p1
@@ -166,15 +178,15 @@ fi
 
 #実行中のコマンドまたはカレントディレクトリの表示
 #.screenrcでterm xterm-256colorと設定している場合
-if [ $TERM = xterm-256color ];then
-    preexec() {
-        #echo -ne "\ek#${1%% *}\e\\"
-        echo -ne "\ek${1%% *}\e\\"
-    }
-    precmd() {
-        echo -ne "\ek$(basename $(pwd))\e\\"
-    }
-fi
+#if [ $TERM = xterm-256color ];then
+    #preexec() {
+        ##echo -ne "\ek#${1%% *}\e\\"
+        #echo -ne "\ek${1%% *}\e\\"
+    #}
+    #precmd() {
+        #echo -ne "\ek$(basename $(pwd))\e\\"
+    #}
+#fi
 # phpenv
 if [ -f ${HOME}/.phpenv/bin/phpenv ]; then
     export PATH=${PATH}:${HOME}/.phpenv/bin
