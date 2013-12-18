@@ -11,7 +11,7 @@ export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 
 #export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
 #export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools:/usr/local/Cellar/git
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools:/usr/local/Cellar/git/1.8.3.4/share/git-core/contrib/diff-highlight
 export LANG=ja_JP.UTF-8
 
 
