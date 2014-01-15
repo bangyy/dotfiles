@@ -91,8 +91,8 @@ highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
 highlight Comment ctermfg=DarkCyan
 
 set autoindent
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set shiftwidth=2
 set expandtab
 set smarttab
@@ -317,6 +317,10 @@ endif
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 set completeopt-=preview
+
+" smartchr
+inoremap <expr> = smartchr#loop('=', ' = ', ' == ', ' === ')
+inoremap <expr> > smartchr#loop('>', ' => ')
 
 "function! HighLightZenkakuSpace()
     "syntax match ZenkakuSpace /　/ display containedin=ALL
