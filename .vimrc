@@ -322,21 +322,21 @@ set completeopt-=preview
 inoremap <expr> = smartchr#loop('=', ' = ', ' == ', ' === ')
 inoremap <expr> > smartchr#loop('>', ' => ')
 
-"function! HighLightZenkakuSpace()
-    "syntax match ZenkakuSpace /　/ display containedin=ALL
-    "highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
-"endf
+function! HighLightZenkakuSpace()
+    syntax match ZenkakuSpace /　/ display containedin=ALL
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
+endf
 
-"function! HighLightHankakuSpace()
-    "syntax match HankakuSpace / / display containedin=ALL
-    "highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-"endf
+function! HighLightHankakuSpace()
+    syntax match HankakuSpace / / display containedin=ALL
+    highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
+endf
 
-"augroup highlightSpace
-  "autocmd!
-  "autocmd BufNew,BufRead * call HighLightZenkakuSpace()
-  "autocmd BufNew,BufRead * call HighLightHankakuSpace()
-"augroup END
+augroup highlightSpace
+  autocmd!
+  autocmd BufNew,BufRead * call HighLightZenkakuSpace()
+  autocmd BufNew,BufRead * call HighLightHankakuSpace()
+augroup END
 
 "augroup highlightHankakuSpace
   "autocmd!
@@ -344,8 +344,8 @@ inoremap <expr> > smartchr#loop('>', ' => ')
   "autocmd VimEnter,WinEnter * match HankakuSpace / /
 "augroup END
 
-augroup highlightZenkakuSpace
-  autocmd!
-  autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
-  autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-augroup END
+"augroup highlightZenkakuSpace
+  "autocmd!
+  "autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
+  "autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+"augroup END
