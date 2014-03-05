@@ -47,6 +47,8 @@ NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/Shougo/neosnippet.git'
 NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
+NeoBundle 'git://github.com/kannokanno/previm.git'
+NeoBundle 'git://github.com/tyru/open-browser.vim.git'
 
 filetype plugin indent on
 
@@ -321,6 +323,14 @@ set completeopt-=preview
 " smartchr
 inoremap <expr> = smartchr#loop('=', ' = ', ' == ', ' === ')
 inoremap <expr> > smartchr#loop('>', ' => ')
+
+" open-browser
+nmap <Leader>w <Plug>(openbrowser-open)
+"nmap <Leader>w <Plug>(openbrowser-smart-search)
+vmap <Leader>w <Plug>(openbrowser-smart-search)
+
+" previm
+nnoremap <silent> <F7> :PrevimOpen<CR>
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL

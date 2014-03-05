@@ -4,16 +4,6 @@
 	#   %/ 現在のディレクトリ。
 	#   ${fg[color]}文字色の設定。fgの部分をbgにすると背景色の設定。エスケープシークエンスで設定することもできる。
 
-export SCREENDIR=${HOME}/.screen
-export LSCOLORS=gxfxcxdxbxegedabagacad
-zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
-#export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools/
-#export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/sbin:$HOME/.npm/bin:$HOME/.npm/man:$HOME/lib/android-sdks/tools:/usr/local/Cellar/git/1.8.3.4/share/git-core/contrib/diff-highlight
-export LANG=ja_JP.UTF-8
-
 
 autoload colors
 
@@ -64,12 +54,20 @@ zstyle ':chpwd:*' recent-dirs-max 5000
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
+#zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34' menu select=1
+
+
 source ~/.zsh/zaw/zaw.zsh
 zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
-#bindkey '^@' zaw-cdr # zaw-cdrをbindkey
 bindkey '^f' zaw-cdr # zaw-cdrをbindkey
 bindkey '^h' zaw-history
 bindkey '^g' zaw-gitdir
+
+# use online help
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/helpfiles
 
 #http://d.hatena.ne.jp/naoya/20130108/1357630895
 # z
@@ -83,7 +81,8 @@ function precmd () {
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-#setopt hist_ignore_dups     # 同じコマンドを重複して記録しない
+setopt hist_ignore_dups     # 同じコマンドを重複して記録しない
+setopt hist_ignore_space
 setopt share_history        # 履歴の共有
 
 
@@ -117,14 +116,11 @@ add-zsh-hook precmd _precmd_vcs_info
 
 
 #PROMPT=%(?.%F{cyan}.%F{red})[%n@%M\:' '%~]$'\n'$%f' '
-#experimental
 #PROMPT=%(?.%F{cyan}.%F{red})'┃ _┃ '$%f' '
 #PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')$%f' '
-#PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\<%f' '
 PROMPT=%(?.%F{cyan}'┃ _┃ '.%F{red}'＞_＜')\{%f' '
 #PROMPT=%(?.%F{cyan}' | _ | '.%F{red}' > _ < ')$%f' '
 #RPROMPT=[%1(v|%F{green}%1v%f - |)%(!.#.%T)]
-#experimental
 #RPROMPT=[%M:%~' '%1(v|%F{green}%1v%f - |)%(!.#.%T)]
 RPROMPT=%1(v|%F{green}'('%1v')'%f|)[%M:%~' '%(!.#.%T)]
 SPROMPT="correct: %R -> %r ? " 
@@ -139,8 +135,6 @@ alias cp='cp -vi'
 alias cdd='cd ..'
 alias grep='grep --color=auto'
 #alias vi='vim'
-#http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias screen='/usr/local/bin/screen'
@@ -175,23 +169,3 @@ if [[ -f ~/.nvm/nvm.sh ]]; then
         unset _nodejs_use_version
     fi
 fi
-
-#実行中のコマンドまたはカレントディレクトリの表示
-#.screenrcでterm xterm-256colorと設定している場合
-#if [ $TERM = xterm-256color ];then
-    #preexec() {
-        ##echo -ne "\ek#${1%% *}\e\\"
-        #echo -ne "\ek${1%% *}\e\\"
-    #}
-    #precmd() {
-        #echo -ne "\ek$(basename $(pwd))\e\\"
-    #}
-#fi
-# phpenv
-if [ -f ${HOME}/.phpenv/bin/phpenv ]; then
-    export PATH=${PATH}:${HOME}/.phpenv/bin
-    eval "$(phpenv init -)"
-fi
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
