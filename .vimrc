@@ -321,8 +321,8 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 set completeopt-=preview
 
 " smartchr
-inoremap <expr> = smartchr#loop('=', ' = ', ' == ', ' === ')
-inoremap <expr> > smartchr#loop('>', ' => ')
+"inoremap <expr> = smartchr#loop('=', ' = ', ' == ', ' === ')
+"inoremap <expr> > smartchr#loop('>', ' => ')
 
 " open-browser
 nmap <Leader>w <Plug>(openbrowser-open)
