@@ -360,3 +360,5 @@ augroup END
   "autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
   "autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
 "augroup END
+
+autocmd Filetype * set formatoptions-=ro
