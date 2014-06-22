@@ -20,7 +20,7 @@ NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
 NeoBundle 'git://github.com/Shougo/vimshell.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle 'git://github.com/mattn/zencoding-vim.git'
+NeoBundle 'git://github.com/mattn/emmet-vim.git'
 NeoBundle 'git://github.com/Shougo/vimproc.git', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
@@ -46,6 +46,7 @@ NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
 NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
 NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
 NeoBundle 'git://github.com/Shougo/neosnippet.git'
+NeoBundle 'git://github.com/Shougo/neosnippet-snippets.git'
 NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
 NeoBundle 'git://github.com/kannokanno/previm.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
