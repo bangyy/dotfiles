@@ -50,6 +50,8 @@ NeoBundle 'git://github.com/Shougo/neosnippet-snippets.git'
 NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
 NeoBundle 'git://github.com/kannokanno/previm.git'
 NeoBundle 'git://github.com/tyru/open-browser.vim.git'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'Yggdroot/indentLine.git'
 
 filetype plugin indent on
 
@@ -362,3 +364,4 @@ augroup END
 "augroup END
 
 autocmd Filetype * set formatoptions-=ro
+au BufRead,BufNewFile *.md set filetype=markdown
