@@ -138,7 +138,9 @@ alias grep='grep --color=auto'
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias screen='/usr/local/bin/screen'
+alias vg='vagrant'
 #alias ssh='ssh_screen'
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 
 #if [ $SHLVL = 1 ];then
     #screen -xR
