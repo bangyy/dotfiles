@@ -30,6 +30,7 @@ export NODE_PATH=/Users/bang/.npm/libraries:$NODE_PATH
 #http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 
+export TMUX_POWERLINE_SEG_WEATHER_LOCATION="26237038"
 
 #http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
 export GOPATH=$HOME

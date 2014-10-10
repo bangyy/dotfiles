@@ -107,6 +107,8 @@ set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,euc-jp,cp932,iso-2022-jp,ucs-2le,ucs-2
 
+set undodir=~/.vimundo
+
 "http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 set cursorline
 " カレントウィンドウにのみ罫線を引く
