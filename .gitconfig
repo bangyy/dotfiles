@@ -3,7 +3,7 @@
 	email = bang.yy.321@gmail.com
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/bang/.gitignore
+	excludesfile = ~/.gitignore
 [merge]
 	tool = vimdiff
 [color]
