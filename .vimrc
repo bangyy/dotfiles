@@ -348,7 +348,7 @@ endf
 augroup highlightSpace
   autocmd!
   autocmd BufNew,BufRead * call HighLightZenkakuSpace()
-  autocmd BufNew,BufRead * call HighLightHankakuSpace()
+  "autocmd BufNew,BufRead * call HighLightHankakuSpace()
 augroup END
 
 "augroup highlightHankakuSpace
@@ -362,6 +362,12 @@ augroup END
   "autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
   "autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
 "augroup END
+
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces cterm=underline guibg=darkgray ctermfg=lightgreen
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
 
 autocmd Filetype * set formatoptions-=ro
 au BufRead,BufNewFile *.md set filetype=markdown
