@@ -169,3 +169,16 @@ if [[ -f ~/.nvm/nvm.sh ]]; then
         unset _nodejs_use_version
     fi
 fi
+
+
+#http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
+function peco-src () {
+  local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src

@@ -5,6 +5,7 @@ path=(
   $path
   /sbin
   /usr/sbin
+  $HOME/bin(N-/)
   $HOME/local/bin(N-/)
   $HOME/.npm/bin(N-/)
   $HOME/.npm/man(N-/)
@@ -28,3 +29,7 @@ export NODE_PATH=/Users/bang/.npm/libraries:$NODE_PATH
 
 #http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+
+
+#http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
+export GOPATH=$HOME
