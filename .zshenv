@@ -10,7 +10,8 @@ path=(
   $HOME/.npm/bin(N-/)
   $HOME/.npm/man(N-/)
   $HOME/lib/android-sdks/tools(N-/)
-  /usr/local/Cellar/git/1.8.3.4/share/git-core/contrib/diff-highlight(N-/)
+  $HOME/.rvm/bin # Add RVM to PATH for scripting
+  /usr/local/Cellar/git/2.0.1/share/git-core/contrib/diff-highlight(N-/)
 )
 
 #export LSCOLORS=gxfxcxdxbxegedabagacad
