@@ -2,7 +2,8 @@
 	name = bangyy
 	email = bang.yy.321@gmail.com
 [core]
-	editor = /usr/bin/vim
+	editor = vim
+  pager = "less -r"
 	excludesfile = ~/.gitignore
 [merge]
 	tool = vimdiff
@@ -26,7 +27,9 @@
 	br = branch
 	ad = add
 	ap = add -p
+  au = add -u
 	up = pull --rebase
+  ps = push
 	rbm = rebase master
 	di = diff
 	dc = diff --cached

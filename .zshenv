@@ -9,9 +9,11 @@ path=(
   $HOME/local/bin(N-/)
   $HOME/.npm/bin(N-/)
   $HOME/.npm/man(N-/)
+  $HOME/.nodebrew/current/bin(N-/)
   $HOME/lib/android-sdks/tools(N-/)
-  $HOME/.rvm/bin # Add RVM to PATH for scripting
-  /usr/local/Cellar/git/2.0.1/share/git-core/contrib/diff-highlight(N-/)
+  $HOME/.rvm/bin(N-/) # Add RVM to PATH for scripting
+  $HOME/local/bin(N-/)
+  /usr/local/Cellar/git/2.7.0/share/git-core/contrib/diff-highlight(N-/)
 )
 
 #export LSCOLORS=gxfxcxdxbxegedabagacad
@@ -25,8 +27,9 @@ if [ -f ${HOME}/.phpenv/bin/phpenv ]; then
     eval "$(phpenv init -)"
 fi
 
+export NODE_PATH=`npm root -g`:$NODE_PATH
+
 [[ -s "/Users/bang/.rvm/scripts/rvm" ]] && source "/Users/bang/.rvm/scripts/rvm"
-export NODE_PATH=/Users/bang/.npm/libraries:$NODE_PATH
 
 #http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim

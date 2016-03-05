@@ -58,12 +58,6 @@ zstyle ':completion:*' recent-dirs-insert both
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34' menu select=1
 
 
-source ~/.zsh/zaw/zaw.zsh
-zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
-bindkey '^f' zaw-cdr # zaw-cdrをbindkey
-bindkey '^h' zaw-history
-bindkey '^g' zaw-gitdir
-
 # use online help
 unalias run-help
 autoload run-help
@@ -84,6 +78,8 @@ SAVEHIST=10000
 setopt hist_ignore_dups     # 同じコマンドを重複して記録しない
 setopt hist_ignore_space
 setopt share_history        # 履歴の共有
+setopt auto_pushd
+setopt pushd_ignore_dups
 
 
 #補完設定ファイルのパスと補完機能の初期化
@@ -134,6 +130,8 @@ alias rm='rm -v'
 alias cp='cp -vi'
 alias cdd='cd ..'
 alias grep='grep --color=auto'
+alias g='git'
+compdef g=git
 #alias vi='vim'
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
@@ -141,6 +139,8 @@ alias screen='/usr/local/bin/screen'
 alias vg='vagrant'
 #alias ssh='ssh_screen'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+
+function git(){hub "$@"}
 
 #if [ $SHLVL = 1 ];then
     #screen -xR
@@ -157,22 +157,6 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
   fi
 fi
 
-#http://d.hatena.ne.jp/mollifier/20110221/p1
-# nvm と指定されたバージョンの Node.js がインストール済みの場合だけ
-# # 設定を有効にする
-if [[ -f ~/.nvm/nvm.sh ]]; then
-    source ~/.nvm/nvm.sh
-
-    if which nvm >/dev/null 2>&1 ;then
-        _nodejs_use_version="stable"
-        if nvm ls | grep -F -e "${_nodejs_use_version}" >/dev/null 2>&1 ;then
-            nvm use "${_nodejs_use_version}" >/dev/null
-        fi
-        unset _nodejs_use_version
-    fi
-fi
-
-
 #http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
 function peco-src () {
   local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
@@ -184,3 +168,59 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^]' peco-src
+
+function peco-cd () {
+  cd "$( ls -1d */ | peco )".
+}
+zle -N peco-cd
+alias pcd='peco-cd'
+
+# http://blog.kenjiskywalker.org/blog/2014/06/12/peco/
+function peco-select-history() {
+  local tac
+  if which tac > /dev/null; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
+  BUFFER=$(history -n 1 | \
+    eval $tac | \
+    awk '!a[$0]++' | \
+    peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^h' peco-select-history
+
+function peco-select-directory() {
+  local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+}
+zle -N peco-select-directory
+bindkey '^f' peco-select-directory
+
+function peco-exec-gitfile() {
+  local selected_file=$(git ls-files `git rev-parse --show-cdup`| peco)
+  if [ -n "$selected_file" ]; then
+    BUFFER="$LBUFFER ${selected_file}"
+    CURSOR=$#BUFFER
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-exec-gitfile
+bindkey '^g' peco-exec-gitfile
+
+function peco-select-hostname() {
+  local host=$(grep -o '^\S\+' ~/.ssh/known_hosts | tr -d '[]' | tr ',' '\n' | sort | peco)
+  if [ -n "$host" ]; then
+    BUFFER="$LBUFFER $host"
+    CURSOR=$#BUFFER
+  fi
+}
+zle -N peco-select-hostname
+bindkey '^x' peco-select-hostname

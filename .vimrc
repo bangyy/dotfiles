@@ -7,53 +7,60 @@ filetype plugin indent off
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   set shortmess+=I
-  call neobundle#rc(expand('~/.vim/bundle/'))
+  call neobundle#begin(expand('~/.vim/bundle/'))
+
+  NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+  NeoBundle 'git://github.com/tpope/vim-surround.git'
+  NeoBundle 'git://github.com/Shougo/unite.vim.git'
+  NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+  NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
+  "NeoBundle 'git://github.com/msanders/snipmate.vim.git'
+  "NeoBundle 'git://github.com/scrooloose/nerdtree.git'
+  NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
+  NeoBundle 'git://github.com/Shougo/vimshell.git'
+  NeoBundle 'git://github.com/thinca/vim-quickrun.git'
+  NeoBundle 'git://github.com/mattn/emmet-vim.git'
+  NeoBundle 'git://github.com/Shougo/vimproc.git', {
+        \ 'build' : {
+        \     'mac' : 'make -f make_mac.mak',
+        \     'unix' : 'make -f make_unix.mak',
+        \    },
+        \ }
+  NeoBundle 'git://github.com/mileszs/ack.vim.git'
+  NeoBundle 'git://github.com/Shougo/vimfiler.git'
+  "NeoBundle 'git://github.com/othree/html5.vim.git'
+  NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
+  NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
+  NeoBundle 'git://github.com/othree/eregex.vim.git'
+  NeoBundle 'git://github.com/tpope/vim-repeat.git'
+  NeoBundle 'git://github.com/scrooloose/syntastic.git'
+  NeoBundle 'git://github.com/thinca/vim-ref.git'
+  NeoBundle 'git://github.com/kana/vim-smartchr.git'
+  NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
+  NeoBundle 'git://github.com/vim-scripts/Align.git'
+  NeoBundle 'git://github.com/tpope/vim-fugitive.git'
+  NeoBundle 'git://github.com/jiangmiao/simple-javascript-indenter.git'
+  NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
+  NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
+  NeoBundle 'git://github.com/Shougo/neosnippet.git'
+  NeoBundle 'git://github.com/Shougo/neosnippet-snippets.git'
+  NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
+  NeoBundle 'git://github.com/kannokanno/previm.git'
+  NeoBundle 'git://github.com/tyru/open-browser.vim.git'
+  NeoBundle 'tpope/vim-markdown'
+  NeoBundle 'Yggdroot/indentLine.git'
+  "NeoBundle 'mattn/jscomplete-vim'
+  NeoBundle 'myhere/vim-nodejs-complete'
+  NeoBundle 'jamescarr/snipmate-nodejs'
+  NeoBundle 'mattn/httpstatus-vim'
+  NeoBundle 'itchyny/calendar.vim'
+  NeoBundle 'ctrlpvim/ctrlp.vim'
+  call neobundle#end()
 endif
 
-NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-NeoBundle 'git://github.com/tpope/vim-surround.git'
-NeoBundle 'git://github.com/Shougo/unite.vim.git'
-NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
-"NeoBundle 'git://github.com/msanders/snipmate.vim.git'
-"NeoBundle 'git://github.com/scrooloose/nerdtree.git'
-NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
-NeoBundle 'git://github.com/Shougo/vimshell.git'
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle 'git://github.com/mattn/emmet-vim.git'
-NeoBundle 'git://github.com/Shougo/vimproc.git', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-NeoBundle 'git://github.com/mileszs/ack.vim.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.git'
-NeoBundle 'git://github.com/othree/html5.vim.git'
-NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
-NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
-NeoBundle 'git://github.com/othree/eregex.vim.git'
-NeoBundle 'git://github.com/tpope/vim-repeat.git'
-NeoBundle 'git://github.com/scrooloose/syntastic.git'
-NeoBundle 'git://github.com/thinca/vim-ref.git'
-NeoBundle 'git://github.com/leafgarland/typescript-vim.git'
-NeoBundle 'git://github.com/kana/vim-smartchr.git'
-NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
-NeoBundle 'git://github.com/vim-scripts/Align.git'
-NeoBundle 'git://github.com/tpope/vim-fugitive.git'
-NeoBundle 'git://github.com/jiangmiao/simple-javascript-indenter.git'
-NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
-NeoBundle 'git://github.com/teramako/jscomplete-vim.git'
-NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
-NeoBundle 'git://github.com/Shougo/neosnippet.git'
-NeoBundle 'git://github.com/Shougo/neosnippet-snippets.git'
-NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
-NeoBundle 'git://github.com/kannokanno/previm.git'
-NeoBundle 'git://github.com/tyru/open-browser.vim.git'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'Yggdroot/indentLine.git'
-
 filetype plugin indent on
+
+scriptencoding utf-8
 
 set fileformats=unix,dos,mac
 set vb t_vb=
@@ -152,13 +159,18 @@ nnoremap <Space>v :vnew
 nnoremap <Space>t :tabnew
 nnoremap <Space>te :tabnew<CR>
 
+nnoremap <C-m> za
+
 "Escの2回押しでハイライト消去
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+nmap <ESC><ESC> ;nohlsearch<CR>;SyntasticReset<CR><ESC>
 
 nnoremap ,s<Space> :source $MYVIMRC<CR>
 inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 
-"filetype plugin on
+"http://deris.hatenablog.jp/entry/2013/05/15/024932
+nnoremap /  /\v
+
+au BufNewFile,BufRead *.md :set filetype=markdown
 
 augroup Dict
   autocmd!
@@ -255,6 +267,7 @@ augroup END
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 
 "jslint.vim
 "let $JS_CMD='node'
@@ -291,24 +304,34 @@ nnoremap <silent> <Space>gc :Gcommit<CR>
 nnoremap <silent> <Space>gC :Git commit --amend<CR>
 
 "syntastic
-" このようにするとjshintを必ず使ってチェックしてくれるようになる
-let g:syntastic_mode_map = {
-            \ 'mode': 'active',
-            \ 'active_filetypes': ['javascript', 'php', 'ruby', 'css'],
-            \ 'passive_filetypes': ['html', 'xml']
-            \ }
+let g:syntastic_javascript_checkers = ['eslint']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_javascript_checker = "jshint"
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=5
+let g:syntastic_mode_map = {
+      \ 'mode': 'active',
+      \ 'active_filetypes': [],
+      \ 'passive_filetypes': ['php', 'ruby', 'css', 'javascript', 'html', 'xml']
+      \ }
+nmap <C-i> ;SyntasticCheck<CR>
 
 "http://layzie.hatenablog.com/entry/20130122/1358811539
 "Simple-Javascript-Indenter
 " この設定入れるとswitchのインデントがいくらかマシに
 let g:SimpleJsIndenter_CaseIndentLevel = -1
 
-"http://layzie.hatenablog.com/entry/20130122/1358811539
 "jscomplete-vim
-" DOMとMozilla関連とES6のメソッドを補完
-let g:jscomplete_use = ['dom', 'moz', 'es6th']
+"autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
+"let g:jscomplete_use = ['dom', 'moz']
+"let g:nodejs_complete_config = {
+      "\  'js_compl_fn': 'jscomplete#CompleteJS',
+      "\  'max_node_compl_len': 15
+      "\}
 
 " neosnippet.vim
 " Plugin key-mappings.
@@ -336,6 +359,14 @@ vmap <Leader>w <Plug>(openbrowser-smart-search)
 
 " previm
 nnoremap <silent> <F7> :PrevimOpen<CR>
+"ctrlp
+let g:ctrlp_dotfiles = 1
+let g:ctrlp_clear_cache_on_exit = 0 " 終了時にキャッシュをクリアしない
+let g:ctrlp_open_new_file = 1 " 新規ファイル作成時にタブで開く
+let g:ctrlp_extensions = ['dir', 'line', 'mixed']
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_mruf_max = 500 " MRUの最大記録数
 
 function! HighLightZenkakuSpace()
     syntax match ZenkakuSpace /　/ display containedin=ALL
@@ -353,22 +384,10 @@ augroup highlightSpace
   "autocmd BufNew,BufRead * call HighLightHankakuSpace()
 augroup END
 
-"augroup highlightHankakuSpace
-  "autocmd!
-  "autocmd VimEnter,ColorScheme * highlight HankakuSpace cterm=underline ctermfg=darkgray guibg=darkgray
-  "autocmd VimEnter,WinEnter * match HankakuSpace / /
-"augroup END
-
-"augroup highlightZenkakuSpace
-  "autocmd!
-  "autocmd VimEnter,ColorScheme * highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=lightblue
-  "autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-"augroup END
-
 augroup HighlightTrailingSpaces
   autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces cterm=underline guibg=darkgray ctermfg=lightgreen
-  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces cterm=underline guibg=darkgray ctermfg=darkgray
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+/
 augroup END
 
 autocmd Filetype * set formatoptions-=ro
