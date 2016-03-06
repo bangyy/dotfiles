@@ -5,6 +5,7 @@ repo = 'Shougo/dein.vim'
 # git clone 後、実行すべきコマンドがある場合はこんな感じ
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
+build = 'make'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -91,13 +92,6 @@ on_source = ['unite.vim']
 [[plugins]]
 repo = 'h1mesuke/unite-outline'
 on_source = ['unite.vim']
-
-[plugins.build]
-windows = 'tools\\update-dll-mingw'
-cygwin  = 'make -f make_cygwin.mak'
-mac     = 'make -f make_mac.mak'
-linux   = 'make'
-unix    = 'gmake'
 
 # 特定の条件で読み込みたいとき
 [[plugins]]
