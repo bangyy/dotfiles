@@ -212,7 +212,8 @@ nnoremap <silent> <F7> :PrevimOpen<CR>
 "ctrlp
 let g:ctrlp_dotfiles = 1
 let g:ctrlp_clear_cache_on_exit = 0 " 終了時にキャッシュをクリアしない
-let g:ctrlp_open_new_file = 1 " 新規ファイル作成時にタブで開く
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_open_multiple_files = 'tj'
 let g:ctrlp_extensions = ['dir', 'line', 'mixed']
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_follow_symlinks = 1
