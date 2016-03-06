@@ -1,0 +1,45 @@
+[[plugins]]
+repo = 'jamescarr/snipmate-nodejs'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'jiangmiao/simple-javascript-indenter'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'myhere/vim-nodejs-complete'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = ['markdown']
+
+# インサートモードに入ったら読み込む
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_source = ['Shougo/neocomplete.vim']
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+on_source = ['Shougo/neocomplete.vim']
+
+# インサートモードに入ったら読み込む
+#[[plugins]]
+#repo = 'Shougo/neocomplcache'
+#on_i = 1
+
+#[[plugins]]
+#repo = 'Shougo/neosnippet.vim'
+#on_source = ['Shougo/neocomplcache']
+
+#[[plugins]]
+#repo = 'Shougo/neosnippet-snippets'
+#on_source = ['Shougo/neocomplcache']

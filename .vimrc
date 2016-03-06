@@ -1,64 +1,30 @@
-"----------------------------------------
-"" plugin - NeoBundle
-"----------------------------------------
-set nocompatible
-filetype plugin indent off
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  set shortmess+=I
-  call neobundle#begin(expand('~/.vim/bundle/'))
-
-  NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-  NeoBundle 'git://github.com/tpope/vim-surround.git'
-  NeoBundle 'git://github.com/Shougo/unite.vim.git'
-  NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-  NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
-  "NeoBundle 'git://github.com/msanders/snipmate.vim.git'
-  "NeoBundle 'git://github.com/scrooloose/nerdtree.git'
-  NeoBundle 'git://github.com/vim-scripts/YankRing.vim.git'
-  NeoBundle 'git://github.com/Shougo/vimshell.git'
-  NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-  NeoBundle 'git://github.com/mattn/emmet-vim.git'
-  NeoBundle 'git://github.com/Shougo/vimproc.git', {
-        \ 'build' : {
-        \     'mac' : 'make -f make_mac.mak',
-        \     'unix' : 'make -f make_unix.mak',
-        \    },
-        \ }
-  NeoBundle 'git://github.com/mileszs/ack.vim.git'
-  NeoBundle 'git://github.com/Shougo/vimfiler.git'
-  "NeoBundle 'git://github.com/othree/html5.vim.git'
-  NeoBundle 'git://github.com/Lokaltog/vim-powerline.git'
-  NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
-  NeoBundle 'git://github.com/othree/eregex.vim.git'
-  NeoBundle 'git://github.com/tpope/vim-repeat.git'
-  NeoBundle 'git://github.com/scrooloose/syntastic.git'
-  NeoBundle 'git://github.com/thinca/vim-ref.git'
-  NeoBundle 'git://github.com/kana/vim-smartchr.git'
-  NeoBundle 'git://github.com/rhysd/accelerated-jk.git'
-  NeoBundle 'git://github.com/vim-scripts/Align.git'
-  NeoBundle 'git://github.com/tpope/vim-fugitive.git'
-  NeoBundle 'git://github.com/jiangmiao/simple-javascript-indenter.git'
-  NeoBundle 'git://github.com/jelera/vim-javascript-syntax.git'
-  NeoBundle 'git://github.com/h1mesuke/unite-outline.git'
-  NeoBundle 'git://github.com/Shougo/neosnippet.git'
-  NeoBundle 'git://github.com/Shougo/neosnippet-snippets.git'
-  NeoBundle 'git://github.com/vim-scripts/snipmate-snippets.git'
-  NeoBundle 'git://github.com/kannokanno/previm.git'
-  NeoBundle 'git://github.com/tyru/open-browser.vim.git'
-  NeoBundle 'tpope/vim-markdown'
-  NeoBundle 'Yggdroot/indentLine.git'
-  "NeoBundle 'mattn/jscomplete-vim'
-  NeoBundle 'myhere/vim-nodejs-complete'
-  NeoBundle 'jamescarr/snipmate-nodejs'
-  NeoBundle 'mattn/httpstatus-vim'
-  NeoBundle 'itchyny/calendar.vim'
-  NeoBundle 'ctrlpvim/ctrlp.vim'
-  call neobundle#end()
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
+set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
+
+call dein#begin(expand('~/.vim/dein'))
+
+" プラグインリストを収めた TOML ファイル
+" TOML を読み込み、キャッシュしておく
+let s:toml      = '~/.vim/dein.toml'
+let s:lazy_toml = '~/.vim/dein_lazy.toml'
+if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#save_cache()
+endif
+
+call dein#end()
+
+" Required:
 filetype plugin indent on
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
 scriptencoding utf-8
 
@@ -182,20 +148,39 @@ augroup END
 "pathoge.vim
 "call pathogen#runtime_append_all_bundles()
 
-"neocomplecache
-let g:neocomplcache_enable_at_startup = 1
-
-let g:NeoComplCache_MaxTryKeywordLength=100
-let g:neocomplcache_enable_underbar_completion = 1
+"neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 " Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-if !exists('g:neocomplcache_same_filetype_lists')
-    let g:neocomplcache_same_filetype_lists = {}
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+if !exists('g:neocomplete#same_filetype_lists')
+    let g:neocomplete#same_filetype_lists = {}
 endif
-let g:neocomplcache_same_filetype_lists['html'] = 'xhtml,javascript'
+let g:neocomplete#same_filetype_lists['html'] = 'xhtml,javascript'
+"let g:NeoComplCache_MaxTryKeywordLength=100
+"let g:neocomplcache_enable_underbar_completion = 1
+
+"neocomplecache
+"let g:neocomplcache_enable_at_startup = 1
+"let g:NeoComplCache_MaxTryKeywordLength=100
+"let g:neocomplcache_enable_underbar_completion = 1
+"" Define keyword.
+"if !exists('g:neocomplcache_keyword_patterns')
+"    let g:neocomplcache_keyword_patterns = {}
+"endif
+"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+"if !exists('g:neocomplcache_same_filetype_lists')
+"    let g:neocomplcache_same_filetype_lists = {}
+"endif
+"let g:neocomplcache_same_filetype_lists['html'] = 'xhtml,javascript'
 
 " NERD_tree
 "let g:NERDTreeShowHidden = 1
@@ -288,8 +273,21 @@ endfunction
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 
-"vim-powerline
-let g:Powerline_symbols = 'fancy'
+"vim-airline
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '⭡'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.readonly = '⭤'
 
 "align.vim
 let g:Align_xstrlen=3
