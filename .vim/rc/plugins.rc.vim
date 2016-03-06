@@ -32,12 +32,6 @@ let g:neocomplete#same_filetype_lists['html'] = 'xhtml,javascript'
 "endif
 "let g:neocomplcache_same_filetype_lists['html'] = 'xhtml,javascript'
 
-" NERD_tree
-"let g:NERDTreeShowHidden = 1
-"let g:NERDChristmasTree = 1
-"let g:NERDTreeShowFiles = 1
-"nnoremap ,t :NERDTree<CR>
-
 "unite.vim
 nnoremap <Space>f :Unite file<CR>
 nnoremap <Space>u :Unite buffer<CR>
@@ -138,6 +132,19 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.readonly = '⭤'
+let g:airline_extensions = ['branch', 'tabline']
+" タブラインにもairlineを適用
+let g:airline#extensions#tabline#enabled = 1
+" （タブが一個の場合）バッファのリストをタブラインに表示する機能をオフ
+let g:airline#extensions#tabline#show_buffers = 0
+" 0でそのタブで開いてるウィンドウ数、1で左のタブから連番
+"let g:airline#extensions#tabline#tab_nr_type = 1
+" タブに表示する名前（fnamemodifyの第二引数）
+"let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = '⮀'
+let g:airline#extensions#tabline#left_alt_sep = '⮁'
+let g:airline#extensions#tabline#right_sep = '⮂'
+let g:airline#extensions#tabline#right_alt_sep = '⮃'
 
 "align.vim
 let g:Align_xstrlen=3
